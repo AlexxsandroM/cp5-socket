@@ -1,3 +1,4 @@
+
 package br.com.fiap.cp5_socket;
 
 import java.io.*;
@@ -18,8 +19,8 @@ public class ConnectionHandler {
 
     public void handleServer() throws IOException {
         // Exemplo: valores de p, q, e (substitua pelos do grupo)
-        BigInteger p = new BigInteger("137");
-        BigInteger q = new BigInteger("191");
+        BigInteger p = new BigInteger("11");
+        BigInteger q = new BigInteger("31");
         BigInteger e = new BigInteger("7");
         RSAUtil rsa = new RSAUtil(p, q, e);
 
