@@ -1,26 +1,15 @@
-# Etapa 1: Build (usa Maven para compilar o projeto)
+# Etapa 1: build
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Etapa 2: Runtime (executa o .jar gerado)
+# Etapa 2: execução
 FROM eclipse-temurin:17-jdk-jammy
-
-# Cria um usuário sem privilégios
-RUN useradd -ms /bin/bash appuser
-
 WORKDIR /app
 
-# Copia o .jar gerado da etapa de build
+# Copia o build da etapa anterior
 COPY --from=build /app/target/*.jar app.jar
 
-# Define permissões seguras
-RUN chown appuser:appuser app.jar
-USER appuser
-
-# Exponha a porta usada pelo servidor (ajuste se for diferente)
-EXPOSE 8080
-
-# Executa a aplicação
+# Comando padrão (pode ser sobrescrito no docker-compose)
 ENTRYPOINT ["java", "-jar", "app.jar"]
