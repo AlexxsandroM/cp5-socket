@@ -29,7 +29,7 @@ Abra dois terminais.
 1) Terminal do Servidor
 - Entre na pasta onde está o `pom.xml`:
 ```powershell
-Set-Location C:\Users\alexs\Downloads\cp5-socket\cp5-socket\cp5-socket
+Set-Location C:cp5-socket\cp5-socket\cp5-socket
 ```
 - Execute o servidor:
 ```powershell
@@ -39,14 +39,14 @@ Set-Location C:\Users\alexs\Downloads\cp5-socket\cp5-socket\cp5-socket
 2) Terminal do Cliente
 - Na mesma pasta do `pom.xml`:
 ```powershell
-Set-Location C:\Users\alexs\Downloads\cp5-socket\cp5-socket\cp5-socket
+Set-Location C:cp5-socket\cp5-socket\cp5-socket
 ```
 - Execute o cliente:
 ```powershell
 & .\mvnw.cmd -q exec:java --% -Dexec.mainClass=br.com.fiap.cp5_socket.Client
 ```
 
-> Dica: Se preferir chamar pelo caminho absoluto, substitua `.\n> mvnw.cmd` por `C:\Users\alexs\Downloads\cp5-socket\cp5-socket\cp5-socket\mvnw.cmd` e mantenha o `-f "...\\pom.xml"` nos comandos.
+> Dica: Se preferir chamar pelo caminho absoluto, substitua `.\n> mvnw.cmd` por `C:cp5-socket\cp5-socket\cp5-socket\mvnw.cmd` e mantenha o `-f "...\\pom.xml"` nos comandos.
 
 ## O que esperar na execução
 - Ao iniciar, Cliente e Servidor imprimem mensagens de conexão e a troca de chaves públicas.
