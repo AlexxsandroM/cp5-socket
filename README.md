@@ -1,5 +1,9 @@
 # CP5 Socket (Cliente/Servidor com RSA)
 
+- RM 557068
+- RM 558486
+- RM 557484
+
 Este projeto demonstra comunicação Cliente/Servidor via sockets TCP em Java, com troca de chaves públicas e uso de RSA para criptografar mensagens durante a conversa.
 
 ## O que o projeto faz
