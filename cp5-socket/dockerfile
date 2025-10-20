@@ -1,15 +1,24 @@
-# Etapa 1: build
+# ====== STAGE 1: build ======
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY . .
-RUN mvn clean package -DskipTests
+# compila e copia dependências para /app/target/deps
+RUN mvn -q -DskipTests clean package dependency:copy-dependencies -DoutputDirectory=target/deps
 
-# Etapa 2: execução
+# ====== STAGE 2: runtime ======
 FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
 
-# Copia o build da etapa anterior
-COPY --from=build /app/target/*.jar app.jar
+# só o que precisamos para rodar mains à escolha:
+# - classes compiladas
+# - dependências (libs)
+COPY --from=build /app/target/classes /app/classes
+COPY --from=build /app/target/deps     /app/deps
 
-# Comando padrão (pode ser sobrescrito no docker-compose)
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# dica: cria usuário não-root (mais seguro)
+RUN useradd -ms /bin/bash appuser
+USER appuser
+
+# nada de ENTRYPOINT fixo; a gente escolhe o main na linha de comando
+# exemplo de execução:
+#   java -cp /app/classes:/app/deps/* br.com.fiap.cp5_socket.Server
